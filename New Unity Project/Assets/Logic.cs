@@ -24,23 +24,25 @@ public class Logic : MonoBehaviour
     public Text playerXTxt = null;
     public Text playerOTxt = null;
     Button[] buttons;
+    Dictionary<Button, Text> buttonDictionary;
 
     void Start()
     {
-
+        
         SetButtons();
     }
 
     void SetButtons()
     {
+        buttonDictionary = new Dictionary<Button, Text>();
         buttons = new Button[9];
+       // buttonDict = new Dictionary<Button, Text>();
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i] = GameObject.Find("Btn" + (i + 1)).GetComponent<Button>();
-            buttons[i].interactable = true;
             //changing all text in buttons
-            Text buttonText = buttons[i].GetComponentInChildren<Text>();
-            buttonText.color = Color.black;
+            Text btnText = (Text)typeof(Logic).GetField("btnTxt" + (i + 1)).GetValue(this);
+            buttonDictionary.Add(buttons[i], btnText);
         }
     }
 
@@ -56,6 +58,7 @@ public class Logic : MonoBehaviour
             int.TryParse(playerXTxt.text, out plusOne);
             playerXTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
+            txtFeedBack.text = "Player " + choice + " wins!";
 
         }
         else if (firstButtonTxt.text.Equals(secondButtonTxt.text) && secondButtonTxt.text.Equals(thirdButtonTxt.text) && thirdButtonTxt.text.Equals(choice) && choice.Equals("O"))
@@ -66,8 +69,9 @@ public class Logic : MonoBehaviour
             int.TryParse(playerOTxt.text, out plusOne);
             playerOTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
+            txtFeedBack.text = "Player " + choice + " wins!";
         }
-        txtFeedBack.text = "Player " + choice + " wins!";
+        
     }
 
 
@@ -95,7 +99,7 @@ public class Logic : MonoBehaviour
         WinningPattern(btnTxt3, btnTxt5, btnTxt7, "O");
     }
 
-    //updates the status of the checker when a button is clicked 
+
     private void Click_Behavior(Text btnText)
     {
         if (checker == false)
@@ -191,16 +195,25 @@ public class Logic : MonoBehaviour
         {
             checker = false;
         }
-        SetButtons();
+        Enable_Buttons();
     }
 
     //loading all buttons and making the unclicable
     public void Disable_Buttons()
     {
-        for (int i = 0; i < buttons.Length; i++)
+        foreach (var pair in buttonDictionary)
         {
-            buttons[i] = GameObject.Find("Btn" + (i + 1)).GetComponent<Button>();
-            buttons[i].interactable = false;
+            pair.Key.interactable = false;
+        }
+    }
+
+    //
+    public void Enable_Buttons()
+    {
+        foreach (var pair in buttonDictionary)
+        {
+            pair.Key.interactable = true;
+            pair.Value.color = Color.black;
         }
     }
 }

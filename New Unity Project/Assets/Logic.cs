@@ -27,6 +27,7 @@ public class Logic : MonoBehaviour
 
     void Start()
     {
+        
         SetButtons();
     }
 
@@ -43,179 +44,54 @@ public class Logic : MonoBehaviour
         }
     }
 
-
-    private void WinningPattern(string firstButtonTxt, string secondButtonTxt, string thirdButtonTxt, string choice)
+    //checks the combination and the text then decides the winner
+    private void WinningPattern(Text firstButtonTxt, Text secondButtonTxt, Text thirdButtonTxt, string choice)
     {
-        if (firstButtonTxt.Equals(secondButtonTxt) && secondButtonTxt.Equals(thirdButtonTxt) && thirdButtonTxt.Equals(firstButtonTxt) && choice.Equals("X"))
+        Color purple = new Color(0.8f, 0.2f, 0.8f);
+        if (firstButtonTxt.text.Equals(secondButtonTxt.text) && secondButtonTxt.text.Equals(thirdButtonTxt.text) && thirdButtonTxt.text.Equals(choice) && choice.Equals("X"))
         {
-            btnTxt1.color = Color.red;
-            btnTxt2.color = Color.red;
-            btnTxt3.color = Color.red;
-            txtFeedBack.text = "Player X wins";
+            firstButtonTxt.color = purple;
+            secondButtonTxt.color = purple;
+            thirdButtonTxt.color = purple;
             int.TryParse(playerXTxt.text, out plusOne);
             playerXTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
 
+        }else if (firstButtonTxt.text.Equals(secondButtonTxt.text) && secondButtonTxt.text.Equals(thirdButtonTxt.text) && thirdButtonTxt.text.Equals(choice) && choice.Equals("O"))
+        {
+            firstButtonTxt.color = Color.green;
+            secondButtonTxt.color = Color.green;
+            thirdButtonTxt.color = Color.green;
+            int.TryParse(playerOTxt.text, out plusOne);
+            playerOTxt.text = Convert.ToString(plusOne + 1);
+            Disable_Buttons();
         }
+        txtFeedBack.text = "Player " + choice + " wins!";
     }
 
 
-
+    //
     public void Score()
     {
-            //======================= Player X ===================================
-            WinningPattern(btnTxt1.text,btnTxt2.text,btnTxt3.text,"X");
-            /*
-        
-        if (btnTxt1.text == "X" && btnTxt2.text == "X" && btnTxt3.text == "X") // Row 1
-        {
-            btnTxt1.color = Color.red;
-            btnTxt2.color = Color.red;
-            btnTxt3.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-            int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-            Disable_Buttons();
-        }
-            */
-
-        if (btnTxt4.text == "X" && btnTxt5.text == "X" && btnTxt6.text == "X") // Row 2
-        {
-            btnTxt4.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt6.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt7.text == "X" && btnTxt8.text == "X" && btnTxt9.text == "X") // Row 3
-        {
-            btnTxt7.color = Color.red;
-            btnTxt8.color = Color.red;
-            btnTxt9.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt1.text == "X" && btnTxt4.text == "X" && btnTxt7.text == "X") // Column 1
-        {
-            btnTxt1.color = Color.red;
-            btnTxt4.color = Color.red;
-            btnTxt7.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt2.text == "X" && btnTxt5.text == "X" && btnTxt8.text == "X") // Column 2
-        {
-            btnTxt2.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt8.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt3.text == "X" && btnTxt6.text == "X" && btnTxt9.text == "X") // Column 3
-        {
-            btnTxt3.color = Color.red;
-            btnTxt6.color = Color.red;
-            btnTxt9.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt1.text == "X" && btnTxt5.text == "X" && btnTxt9.text == "X") // Diagonal 1
-        {
-            btnTxt1.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt9.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt3.text == "X" && btnTxt5.text == "X" && btnTxt7.text == "X") // Diagonal 2
-        {
-            btnTxt3.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt7.color = Color.red;
-            txtFeedBack.text = "Player X wins";
-           int.TryParse(playerXTxt.text, out plusOne);
-            playerXTxt.text = Convert.ToString(plusOne + 1);
-        }
+        //======================= Player X ===================================
+        WinningPattern(btnTxt1, btnTxt2, btnTxt3, "X");
+        WinningPattern(btnTxt4, btnTxt5, btnTxt6, "X");
+        WinningPattern(btnTxt7, btnTxt8, btnTxt9, "X");
+        WinningPattern(btnTxt1, btnTxt4, btnTxt7, "X");
+        WinningPattern(btnTxt2, btnTxt5, btnTxt8, "X");
+        WinningPattern(btnTxt3, btnTxt6, btnTxt9, "X");
+        WinningPattern(btnTxt1, btnTxt5, btnTxt9, "X");
+        WinningPattern(btnTxt3, btnTxt5, btnTxt7, "X");
 
         //======================= Player O ===================================
-        if (btnTxt1.text == "O" && btnTxt2.text == "O" && btnTxt3.text == "O") // Row 1
-        {
-            btnTxt1.color = Color.red;
-            btnTxt2.color = Color.red;
-            btnTxt3.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt4.text == "O" && btnTxt5.text == "O" && btnTxt6.text == "O") // Row 2
-        {
-            btnTxt4.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt6.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt7.text == "O" && btnTxt8.text == "O" && btnTxt9.text == "O") // Row 3
-        {
-            btnTxt7.color = Color.red;
-            btnTxt8.color = Color.red;
-            btnTxt9.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt1.text == "O" && btnTxt4.text == "O" && btnTxt7.text == "O") // Column 1
-        {
-            btnTxt1.color = Color.red;
-            btnTxt4.color = Color.red;
-            btnTxt7.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt2.text == "O" && btnTxt5.text == "O" && btnTxt8.text == "O") // Column 2
-        {
-            btnTxt2.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt8.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt3.text == "O" && btnTxt6.text == "O" && btnTxt9.text == "O") // Column 3
-        {
-            btnTxt3.color = Color.red;
-            btnTxt6.color = Color.red;
-            btnTxt9.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt1.text == "O" && btnTxt5.text == "O" && btnTxt9.text == "O") // Diagonal 1
-        {
-            btnTxt1.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt9.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
-        if (btnTxt3.text == "O" && btnTxt5.text == "O" && btnTxt7.text == "O") // Diagonal 2
-        {
-            btnTxt3.color = Color.red;
-            btnTxt5.color = Color.red;
-            btnTxt7.color = Color.red;
-            txtFeedBack.text = "Player O wins";
-            int.TryParse(playerOTxt.text, out plusOne);
-            playerOTxt.text = Convert.ToString(plusOne + 1);
-        }
+        WinningPattern(btnTxt1, btnTxt2, btnTxt3, "O");
+        WinningPattern(btnTxt4, btnTxt5, btnTxt6, "O");
+        WinningPattern(btnTxt7, btnTxt8, btnTxt9, "O");
+        WinningPattern(btnTxt1, btnTxt4, btnTxt7, "O");
+        WinningPattern(btnTxt2, btnTxt5, btnTxt8, "O");
+        WinningPattern(btnTxt3, btnTxt6, btnTxt9, "O");
+        WinningPattern(btnTxt1, btnTxt5, btnTxt9, "O");
+        WinningPattern(btnTxt3, btnTxt5, btnTxt7, "O");
     }
 
     public void Button1_Click()

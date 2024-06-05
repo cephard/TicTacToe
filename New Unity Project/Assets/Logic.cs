@@ -25,14 +25,37 @@ public class Logic : MonoBehaviour
     public Text playerOTxt = null;
     Button[] buttons;
 
+    void Start()
+    {
+        SetButtons();
+    }
 
     void SetButtons()
     {
-         buttons = new Button[10];
-        for (int i = 1; i <= buttons.Length; i++)
+         buttons = new Button[9];
+        for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i] = GameObject.Find("Btn" + i).GetComponent<Button>();
+            buttons[i] = GameObject.Find("Btn" + (i+1)).GetComponent<Button>();
             buttons[i].interactable = true;
+              //changing all text in buttons
+            Text buttonText = buttons[i].GetComponentInChildren<Text>();
+            buttonText.color = Color.black;
+        }
+    }
+
+
+    private void WinningPattern(string firstButtonTxt, string secondButtonTxt, string thirdButtonTxt, string choice)
+    {
+        if (firstButtonTxt.Equals(secondButtonTxt) && secondButtonTxt.Equals(thirdButtonTxt) && thirdButtonTxt.Equals(firstButtonTxt) && choice.Equals("X"))
+        {
+            btnTxt1.color = Color.red;
+            btnTxt2.color = Color.red;
+            btnTxt3.color = Color.red;
+            txtFeedBack.text = "Player X wins";
+            int.TryParse(playerXTxt.text, out plusOne);
+            playerXTxt.text = Convert.ToString(plusOne + 1);
+            Disable_Buttons();
+
         }
     }
 
@@ -40,7 +63,10 @@ public class Logic : MonoBehaviour
 
     public void Score()
     {
-        //======================= Player X ===================================
+            //======================= Player X ===================================
+            WinningPattern(btnTxt1.text,btnTxt2.text,btnTxt3.text,"X");
+            /*
+        
         if (btnTxt1.text == "X" && btnTxt2.text == "X" && btnTxt3.text == "X") // Row 1
         {
             btnTxt1.color = Color.red;
@@ -51,6 +77,8 @@ public class Logic : MonoBehaviour
             playerXTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
         }
+            */
+
         if (btnTxt4.text == "X" && btnTxt5.text == "X" && btnTxt6.text == "X") // Row 2
         {
             btnTxt4.color = Color.red;
@@ -202,7 +230,6 @@ public class Logic : MonoBehaviour
             btnTxt1.text = "O";
             checker = false;
         }
-        buttons[1].interactable = false;
         Score();
       
     }
@@ -366,10 +393,9 @@ public class Logic : MonoBehaviour
     //loading all buttons and making the unclicable
     public void Disable_Buttons()
     {
-        buttons = new Button[10];
-        for (int i = 1; i <= buttons.Length; i++)
+        for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i] = GameObject.Find("Btn" + i).GetComponent<Button>();
+            buttons[i] = GameObject.Find("Btn" + (i+1)).GetComponent<Button>();
             buttons[i].interactable = false;
         }
     }

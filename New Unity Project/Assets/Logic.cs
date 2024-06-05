@@ -27,18 +27,18 @@ public class Logic : MonoBehaviour
 
     void Start()
     {
-        
+
         SetButtons();
     }
 
     void SetButtons()
     {
-         buttons = new Button[9];
+        buttons = new Button[9];
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i] = GameObject.Find("Btn" + (i+1)).GetComponent<Button>();
+            buttons[i] = GameObject.Find("Btn" + (i + 1)).GetComponent<Button>();
             buttons[i].interactable = true;
-              //changing all text in buttons
+            //changing all text in buttons
             Text buttonText = buttons[i].GetComponentInChildren<Text>();
             buttonText.color = Color.black;
         }
@@ -57,7 +57,8 @@ public class Logic : MonoBehaviour
             playerXTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
 
-        }else if (firstButtonTxt.text.Equals(secondButtonTxt.text) && secondButtonTxt.text.Equals(thirdButtonTxt.text) && thirdButtonTxt.text.Equals(choice) && choice.Equals("O"))
+        }
+        else if (firstButtonTxt.text.Equals(secondButtonTxt.text) && secondButtonTxt.text.Equals(thirdButtonTxt.text) && thirdButtonTxt.text.Equals(choice) && choice.Equals("O"))
         {
             firstButtonTxt.color = Color.green;
             secondButtonTxt.color = Color.green;
@@ -94,147 +95,74 @@ public class Logic : MonoBehaviour
         WinningPattern(btnTxt3, btnTxt5, btnTxt7, "O");
     }
 
-    public void Button1_Click()
+    //updates the status of the checker when a button is clicked 
+    private void Click_Behavior(Text btnText)
     {
         if (checker == false)
         {
-            btnTxt1.text = "X";
+            btnText.text = "X";
             checker = true;
         }
         else
         {
-            btnTxt1.text = "O";
+            btnText.text = "O";
             checker = false;
         }
         Score();
-      
+
+    }
+
+    public void Button1_Click()
+    {
+        Click_Behavior(btnTxt1);
+
     }
 
 
     public void Button2_Click()
     {
-        if (checker == false)
-        {
-            btnTxt2.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt2.text = "O";
-            checker = false;
-        }
-        Score();
-        
+        Click_Behavior(btnTxt2);
+
     }
 
     public void Button3_Click()
     {
-        if (checker == false)
-        {
-            btnTxt3.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt3.text = "O";
-            checker = false;
-        }
-        Score();
-       
+        Click_Behavior(btnTxt3);
+
     }
 
     public void Button4_Click()
     {
-        if (checker == false)
-        {
-            btnTxt4.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt4.text = "O";
-            checker = false;
-        }
-        Score();
-     
+        Click_Behavior(btnTxt4);
+
     }
 
     public void Button5_Click()
     {
-        if (checker == false)
-        {
-            btnTxt5.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt5.text = "O";
-            checker = false;
-        }
-        Score();
-  
+        Click_Behavior(btnTxt5);
+
     }
 
     public void Button6_Click()
     {
-        if (checker == false)
-        {
-            btnTxt6.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt6.text = "O";
-            checker = false;
-        }
-        Score();
-   
+        Click_Behavior(btnTxt6);
+
     }
 
     public void Button7_Click()
     {
-        if (checker == false)
-        {
-            btnTxt7.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt7.text = "O";
-            checker = false;
-        }
-        Score();
-      
+        Click_Behavior(btnTxt7);
+
     }
 
     public void Button8_Click()
     {
-        if (checker == false)
-        {
-            btnTxt8.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt8.text = "O";
-            checker = false;
-        }
-        Score();
+        Click_Behavior(btnTxt8);
     }
 
     public void Button9_Click()
     {
-        if (checker == false)
-        {
-            btnTxt9.text = "X";
-            checker = true;
-        }
-        else
-        {
-            btnTxt9.text = "O";
-            checker = false;
-        }
-        Score();
+        Click_Behavior(btnTxt9);
     }
 
     //resetting everything to a completely new game
@@ -271,7 +199,7 @@ public class Logic : MonoBehaviour
     {
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttons[i] = GameObject.Find("Btn" + (i+1)).GetComponent<Button>();
+            buttons[i] = GameObject.Find("Btn" + (i + 1)).GetComponent<Button>();
             buttons[i].interactable = false;
         }
     }

@@ -26,12 +26,13 @@ public class Logic : MonoBehaviour
     Button[] buttons;
 
 
-    void Start()
+    void SetButtons()
     {
-        buttons = new Button[10];
-        for (int i = 1; i < buttons.Length; i++)
+         buttons = new Button[10];
+        for (int i = 1; i <= buttons.Length; i++)
         {
             buttons[i] = GameObject.Find("Btn" + i).GetComponent<Button>();
+            buttons[i].interactable = true;
         }
     }
 
@@ -201,6 +202,7 @@ public class Logic : MonoBehaviour
             btnTxt1.text = "O";
             checker = false;
         }
+        buttons[1].interactable = false;
         Score();
       
     }
@@ -332,12 +334,15 @@ public class Logic : MonoBehaviour
         Score();
     }
 
+    //resetting everything to a completely new game
     public void NewGame()
     {
-        ResetGame();
         playerXTxt.text = "0";
         playerOTxt.text = "0";
+        ResetGame();
     }
+
+    //reseting the board but retaimning previous score
     public void ResetGame()
     {
         btnTxt1.text = null;
@@ -355,20 +360,17 @@ public class Logic : MonoBehaviour
         {
             checker = false;
         }
+        SetButtons();
     }
 
-    private void Disable_Buttons()
+    //loading all buttons and making the unclicable
+    public void Disable_Buttons()
     {
-        foreach (Button button in buttons)
+        buttons = new Button[10];
+        for (int i = 1; i <= buttons.Length; i++)
         {
-            button.interactable = false;
-        }
-    }
-    private void Enable_Buttons()
-    {
-        foreach (Button button in buttons)
-        {
-            button.interactable = true;
+            buttons[i] = GameObject.Find("Btn" + i).GetComponent<Button>();
+            buttons[i].interactable = false;
         }
     }
 }

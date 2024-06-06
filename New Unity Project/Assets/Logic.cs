@@ -24,8 +24,9 @@ public class Logic : MonoBehaviour
     public Text txtFeedBack = null;
     public Text playerXTxt = null;
     public Text playerOTxt = null;
-    public Text besOfValOut = null;
-    private int bestOfVal;
+    public Text bestOf = null;
+    public Text bestOfValOut = null;
+    public int bestOfVal;
     Button[] buttons;
     Dictionary<Button, Text> buttonDictionary;
 
@@ -33,7 +34,6 @@ public class Logic : MonoBehaviour
     {
 
         SetButtons();
-        SetBestOfValue(null);
     }
 
     void SetButtons()
@@ -63,8 +63,13 @@ public class Logic : MonoBehaviour
             playerXTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
             txtFeedBack.text = "Player " + choice + " wins!";
-
+            
+            bestOf.text = "Remaining :";
+            int.TryParse(bestOfValOut.text,out bestOfVal);
+            bestOfVal -= 1;
+            bestOfValOut.text = Convert.ToString(bestOfVal);
         }
+
         else if (firstButtonTxt.text.Equals(secondButtonTxt.text) && secondButtonTxt.text.Equals(thirdButtonTxt.text) && thirdButtonTxt.text.Equals(choice) && choice.Equals("O"))
         {
             firstButtonTxt.color = Color.green;
@@ -74,8 +79,12 @@ public class Logic : MonoBehaviour
             playerOTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
             txtFeedBack.text = "Player " + choice + " wins!";
+            
+            bestOf.text = "Remaining :";
+            int.TryParse(bestOfValOut.text,out bestOfVal);
+            bestOfVal -= 1;
+            bestOfValOut.text = Convert.ToString(bestOfVal);
         }
-
     }
 
     //
@@ -236,14 +245,18 @@ public class Logic : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-//to main
-    public void SetBestOfValue(string value){
-        if (value == null){
-            bestOfVal = 5;
-        }else{
-           int.TryParse(value, out bestOfVal);
-        }
-        besOfValOut.text = Convert.ToString(bestOfVal);
-    }
+    //to main
+    /*
+     public void SetBestOfValue(string? value){
+         if (value == null){
+             bestOfVal = 5;
+         }
+
+         else{
+            int.TryParse(value, out bestOfVal);
+         }
+         besOfValOut.text = Convert.ToString(bestOfVal);
+         */
+
 }
 

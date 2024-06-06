@@ -1559,8 +1559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -387.2, y: -339}
-  m_SizeDelta: {x: 193.6, y: 69.7}
+  m_AnchoredPosition: {x: -595, y: -339}
+  m_SizeDelta: {x: 63.7611, y: 69.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1033519945
 MonoBehaviour:
@@ -1595,7 +1595,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 5
 --- !u!222 &1033519946
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2107,7 +2107,9 @@ MonoBehaviour:
   txtFeedBack: {fileID: 1233264544}
   playerXTxt: {fileID: 403141908}
   playerOTxt: {fileID: 1039567230}
-  besOfValOut: {fileID: 1033519945}
+  bestOf: {fileID: 1372574843}
+  bestOfValOut: {fileID: 1033519945}
+  bestOfVal: 0
 --- !u!1 &1233264542
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,8 +2613,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -624, y: -339}
-  m_SizeDelta: {x: 280, y: 69.7}
+  m_AnchoredPosition: {x: -774.81274, y: -339}
+  m_SizeDelta: {x: 245.6933, y: 69.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1372574843
 MonoBehaviour:

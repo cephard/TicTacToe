@@ -236,6 +236,7 @@ public class Logic : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+//
     public void SetBestOfValue(string value){
         if (value == null){
             bestOfVal = 5;
@@ -245,3 +246,4 @@ public class Logic : MonoBehaviour
         besOfValOut.text = Convert.ToString(bestOfVal);
     }
 }
+

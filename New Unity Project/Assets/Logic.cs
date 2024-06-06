@@ -28,7 +28,7 @@ public class Logic : MonoBehaviour
 
     void Start()
     {
-        
+
         SetButtons();
     }
 
@@ -36,7 +36,7 @@ public class Logic : MonoBehaviour
     {
         buttonDictionary = new Dictionary<Button, Text>();
         buttons = new Button[9];
-       // buttonDict = new Dictionary<Button, Text>();
+        // buttonDict = new Dictionary<Button, Text>();
         for (int i = 0; i < buttons.Length; i++)
         {
             buttons[i] = GameObject.Find("Btn" + (i + 1)).GetComponent<Button>();
@@ -71,7 +71,7 @@ public class Logic : MonoBehaviour
             Disable_Buttons();
             txtFeedBack.text = "Player " + choice + " wins!";
         }
-        
+
     }
 
 
@@ -100,7 +100,7 @@ public class Logic : MonoBehaviour
     }
 
 
-    private void Click_Behavior(Text btnText)
+    private void Click_Behavior(Button button, Text btnText)
     {
         if (checker == false)
         {
@@ -112,61 +112,71 @@ public class Logic : MonoBehaviour
             btnText.text = "O";
             checker = false;
         }
+        button.interactable = false;
         Score();
 
     }
 
+
     public void Button1_Click()
     {
-        Click_Behavior(btnTxt1);
+        Click_Behavior(buttons[0], btnTxt1);
 
     }
 
 
     public void Button2_Click()
     {
-        Click_Behavior(btnTxt2);
+
+        Click_Behavior(buttons[1], btnTxt2);
 
     }
 
     public void Button3_Click()
     {
-        Click_Behavior(btnTxt3);
+
+        Click_Behavior(buttons[2], btnTxt3);
 
     }
 
     public void Button4_Click()
     {
-        Click_Behavior(btnTxt4);
+
+        Click_Behavior(buttons[3], btnTxt4);
 
     }
 
     public void Button5_Click()
     {
-        Click_Behavior(btnTxt5);
+
+        Click_Behavior(buttons[4], btnTxt5);
 
     }
 
     public void Button6_Click()
     {
-        Click_Behavior(btnTxt6);
+
+        Click_Behavior(buttons[5], btnTxt6);
 
     }
 
     public void Button7_Click()
     {
-        Click_Behavior(btnTxt7);
+
+        Click_Behavior(buttons[6], btnTxt7);
 
     }
 
     public void Button8_Click()
     {
-        Click_Behavior(btnTxt8);
-    }
 
+        Click_Behavior(buttons[7], btnTxt8);
+    }
     public void Button9_Click()
     {
-        Click_Behavior(btnTxt9);
+
+        Click_Behavior(buttons[8], btnTxt9);
+
     }
 
     //resetting everything to a completely new game
@@ -199,7 +209,7 @@ public class Logic : MonoBehaviour
     }
 
     //loading all buttons and making the unclicable
-    public void Disable_Buttons()
+    private void Disable_Buttons()
     {
         foreach (var pair in buttonDictionary)
         {
@@ -208,7 +218,7 @@ public class Logic : MonoBehaviour
     }
 
     //
-    public void Enable_Buttons()
+    private void Enable_Buttons()
     {
         foreach (var pair in buttonDictionary)
         {

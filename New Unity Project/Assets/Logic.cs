@@ -29,8 +29,9 @@ public class Logic : MonoBehaviour
     public Text welcomeTxt = null;
     public int bestOfVal;
     [SerializeField] InputField input;
+    string userName;
 
-   
+
     Button[] buttons;
     Dictionary<Button, Text> buttonDictionary;
 
@@ -38,17 +39,59 @@ public class Logic : MonoBehaviour
     {
 
         SetButtons();
+        LoadPlayerName();
+    }
+    void LoadPlayerName()
+    {
+        if (PlayerPrefs.HasKey("PlayerName"))
+        {
+            string savedName = PlayerPrefs.GetString("PlayerName");
+            string greeting = GetGreeting();
+            welcomeTxt.text = $"{greeting} {savedName}!";
+        }
     }
 
-      public void BeginGaming(string sceneName){
-       string userName = input.text;
-        if (userName == null || userName == ""){
-            welcomeTxt.text = "Please enter your name!";
-        }else{
-            welcomeTxt.text ="Welcome "+userName;
-            SceneManager.LoadScene(sceneName);
+    string GetGreeting()
+    {
+        DateTime now = DateTime.Now;
+        int hour = now.Hour;
+
+        if (hour < 12)
+        {
+            return "Good morning";
         }
-        
+        else if (hour < 18)
+        {
+            return "Good afternoon";
+        }
+        else
+        {
+            return "Good evening";
+        }
+    }
+
+    //simple method for welcome scene
+    public void BeginGaming(string sceneName)
+    {
+        userName = input.text;
+        if (string.IsNullOrEmpty(userName))
+        {
+            welcomeTxt.text = "Please enter your name!";
+        }
+        else
+        {
+            //saving the name 
+            PlayerPrefs.SetString("PlayerName", userName);
+            PlayerPrefs.Save();
+            welcomeTxt.text = "Welcome " + userName;
+            StartCoroutine(LoadNextScene(sceneName));
+        }
+    }
+
+    private IEnumerator LoadNextScene(string sceneName)
+    {
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneName);
     }
 
     void SetButtons()
@@ -78,9 +121,9 @@ public class Logic : MonoBehaviour
             playerXTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
             txtFeedBack.text = "Player " + choice + " wins!";
-            
+
             bestOf.text = "Remaining :";
-            int.TryParse(bestOfValOut.text,out bestOfVal);
+            int.TryParse(bestOfValOut.text, out bestOfVal);
             bestOfVal -= 1;
             bestOfValOut.text = Convert.ToString(bestOfVal);
         }
@@ -94,9 +137,9 @@ public class Logic : MonoBehaviour
             playerOTxt.text = Convert.ToString(plusOne + 1);
             Disable_Buttons();
             txtFeedBack.text = "Player " + choice + " wins!";
-            
+
             bestOf.text = "Remaining :";
-            int.TryParse(bestOfValOut.text,out bestOfVal);
+            int.TryParse(bestOfValOut.text, out bestOfVal);
             bestOfVal -= 1;
             bestOfValOut.text = Convert.ToString(bestOfVal);
         }
@@ -259,6 +302,16 @@ public class Logic : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+        #else
+        Application.Quit();
+        #endif
+    }
+    
 
     //to main
     /*

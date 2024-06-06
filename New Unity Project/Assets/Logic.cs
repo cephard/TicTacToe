@@ -200,11 +200,7 @@ public class Logic : MonoBehaviour
         btnTxt8.text = null;
         btnTxt9.text = null;
         txtFeedBack.text = null;
-
-        if (checker == true)
-        {
-            checker = false;
-        }
+        checker = false;
         Enable_Buttons();
     }
 

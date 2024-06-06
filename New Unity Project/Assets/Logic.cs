@@ -236,7 +236,7 @@ public class Logic : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
-//
+//to main
     public void SetBestOfValue(string value){
         if (value == null){
             bestOfVal = 5;

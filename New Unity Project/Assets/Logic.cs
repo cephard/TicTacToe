@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Logic : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class Logic : MonoBehaviour
     public Text txtFeedBack = null;
     public Text playerXTxt = null;
     public Text playerOTxt = null;
+    public Text besOfValOut = null;
+    private int bestOfVal;
     Button[] buttons;
     Dictionary<Button, Text> buttonDictionary;
 
@@ -30,6 +33,7 @@ public class Logic : MonoBehaviour
     {
 
         SetButtons();
+        SetBestOfValue(null);
     }
 
     void SetButtons()
@@ -73,7 +77,6 @@ public class Logic : MonoBehaviour
         }
 
     }
-
 
     //
     public void Score()
@@ -200,11 +203,7 @@ public class Logic : MonoBehaviour
         btnTxt8.text = null;
         btnTxt9.text = null;
         txtFeedBack.text = null;
-
-        if (checker == true)
-        {
-            checker = false;
-        }
+        checker = false;
         Enable_Buttons();
     }
 
@@ -225,5 +224,24 @@ public class Logic : MonoBehaviour
             pair.Key.interactable = true;
             pair.Value.color = Color.black;
         }
+    }
+
+    public void LoadSettings(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void BackToGame(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
+    }
+
+    public void SetBestOfValue(string value){
+        if (value == null){
+            bestOfVal = 5;
+        }else{
+           int.TryParse(value, out bestOfVal);
+        }
+        besOfValOut.text = Convert.ToString(bestOfVal);
     }
 }

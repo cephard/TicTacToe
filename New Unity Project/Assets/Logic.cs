@@ -26,7 +26,11 @@ public class Logic : MonoBehaviour
     public Text playerOTxt = null;
     public Text bestOf = null;
     public Text bestOfValOut = null;
+    public Text welcomeTxt = null;
     public int bestOfVal;
+    [SerializeField] InputField input;
+
+   
     Button[] buttons;
     Dictionary<Button, Text> buttonDictionary;
 
@@ -34,6 +38,17 @@ public class Logic : MonoBehaviour
     {
 
         SetButtons();
+    }
+
+      public void BeginGaming(string sceneName){
+       string userName = input.text;
+        if (userName == null || userName == ""){
+            welcomeTxt.text = "Please enter your name!";
+        }else{
+            welcomeTxt.text ="Welcome "+userName;
+            SceneManager.LoadScene(sceneName);
+        }
+        
     }
 
     void SetButtons()
@@ -257,6 +272,5 @@ public class Logic : MonoBehaviour
          }
          besOfValOut.text = Convert.ToString(bestOfVal);
          */
-
 }
 
